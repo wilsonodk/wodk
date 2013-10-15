@@ -1,0 +1,35 @@
+{
+    "name": "Wodk/Wodk",
+    "type": "library",
+    "version": "v1.0.0",
+    "keywords": [
+        "database",
+        "mysqli",
+        "logger",
+        "twig",
+        "wodk"
+    ],
+    "authors": [
+        {
+            "name": "Wilson Wise",
+            "email": "wilson@odk.com",
+            "homepage": "http://wilson.odk.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "wilson@odk.com",
+        "issues": "https://github.com/wilsonodk/wodk/issues"
+    },
+    "autoload": {
+        "psr-0": {
+            "Wodk_": "lib/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/wilsonodk/wodk"
+        }
+    ]
+}
