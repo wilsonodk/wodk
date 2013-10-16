@@ -1,5 +1,12 @@
 # Wodk Library
 
++ [DB][#db-class]
+
++ [Logger][#logger-class]
+
++ [Twig Extensions][#twigextensions-class]
+
+
 ## DB Class
 
 A subclass of [MySQLi][]. It includes a few helper methods that assist
@@ -9,104 +16,165 @@ into `SELECT * FROM myapp_table WHERE id = 1`.
 
 * qry
 > This will execute a SQL statement, but is extended to take arguments
-> ala [sprintf][].  
-> @param The first argument is the SQL statement.  
-> @params The following arguments are items to be formatted into the
-> SQL statement.  
-> @returns The query with all argments formatted.  
+> ala [sprintf][].
+>
+> @param — The first argument is the SQL statement.
+>
+> @param `...` — The following arguments are items to be formatted into
+> the SQL statement.
+>
+> @returns — The query with all argments formatted.
 
 * getInsertId
-> @returns Returns the insert id from the last INSERT query.
+> @returns — Returns the insert id from the last INSERT query.
 
 * setPrefix
 > Will set the prefix to be used when formatting a query. Will
-> determine if we need to use a prefix based on what is passed in.  
-> @param $prefix A string to use a the prefix for tables in SQL
-> statements.  
-> @returns The instance for chaining.  
+> determine if we need to use a prefix based on what is passed in.
+>
+> @param $prefix — A string to use a the prefix for tables in SQL
+> statements.
+>
+> @returns — DB instance for chaining.
 
 * setPrefixPattern
 > Set the Regular Expression to used for prefix replacement. The
 > default RegEx is `'/{{(\w+)}}/'`. See [preg_replace][] for more
-> information.  
-> @param $pattern A string of a RegEx pattern.  
-> @returns The instance for chaining.  
+> information.
+>
+> @param $pattern — A string of a RegEx pattern.
+>
+> @returns — DB instance for chaining.
 
 * setQuery
-> Set a "prepared" query for use later.   
-> @param The name of the query for use later.  
-> @param The SQL query.  
-> @params The arguments to be formatted into the query.  
-> @returns The instance for chaining.  
+> Set a "prepared" query for use later.
+>
+> @param — The name of the query for use later.
+>
+> @param — The SQL query.
+>
+> @param `...` — The arguments to be formatted into the query.
+>
+> @returns DB instance for chaining.
 
 * unsetQuery
-> Delete a "prepared" query.  
-> @param $name The name of the query to remove.  
-> @returns The instance for chaining.  
+> Delete a "prepared" query.
+>
+> @param $name — The name of the query to remove.
+>
+> @returns — DB instance for chaining.
 
 * getQuery
-> Get a "prepared" query.  
-> @param $name The name of the query to return.  
-> @returns The formatted query.  
+> Get a "prepared" query.
+>
+> @param $name — The name of the query to return.
+>
+> @returns — The formatted query.
 
 * useQuery
-> Call a previously "prepared" query.  
-> @param $name The name of the query to use.  
+> Call a previously "prepared" query.
+>
+> @param $name — The name of the query to use.
 
 * getLastQuery
 > Return the last query in it's "prepared" format.
-> @returns The formatted query that was last run.  
+> @returns — The formatted query that was last run.
 
 * formatQuery
-> Public "interface" for prepareQuery.  
-> @param The SQL query.  
-> @params The arguments to be formatted into the query.  
-> @returns Formatted query.  
+> Public "interface" for prepareQuery.
+>
+> @param — The SQL query.
+>
+> @param `...` — The arguments to be formatted into the query.
+>
+> @returns — Formatted query.
 
 * prepareQuery
-> Do the formatting of a query.  
-> @param $args An array of items to format. First item is the SQL
-> statement. Remaining items are to be formatted into SQL statement.  
-> @returns The formatted query.  
+> Do the formatting of a query.
+>
+> @param $args — An array of items to format. First item is the SQL
+> statement. Remaining items are to be formatted into SQL statement.
+>
+> @returns — The formatted query.
+
 
 ## Logger Class
 
-A simple logging class. The purpose of this class is to provide a simple log file that can then be displayed to an administrative user of the web app.
+A very simple logging class. The purpose of this class is to provide a
+simple log file that can then be displayed to an administrative user of
+the web app.
 
 * log
-> Record a particular message in the file. There are two ways to use it, simple or complex.
+> Record a particular message in the file. There are two ways to use
+> it, simple or complex.
 >
-> Simple logging takes one argument, the log message. Writes an entry to the log as `[timestamp] message`.  
-> @param `$message`  
-> @returns Logger instance  
+> Simple logging takes one argument, the log message. Writes an entry
+> to the log as `[$timestamp] message`.
 >
-> Complex logging takes at least two arguments. The first is the `type` of message. 
-> The remaining arguments are messages to log with that `type`. Writes as entry to the log as `[$timestamp] ($type) $message`.  
-> @param `$type` The type of message; typically `error` or `message`. Any value is allowed.  
-> @param `@args` The messages to log as this `type`  
-> @returns Logger instance
+> @param — The message.
+>
+> @returns — Logger instance for chaining.
+>
+> Complex logging takes at least two arguments. The first is the
+> `type` of message.
+>
+> The remaining arguments are messages to log with that `type`. Writes
+> as entry to the log as `[$timestamp] ($type) $message`.
+>
+> @param — The type of message; typically `error` or `message`. Any
+> value is allowed.
+>
+> @param `...` — The messages to log as this `type`.
+>
+> @returns — Logger instance for chaining.
 
 * error
-> Log an error message with `sprintf` formatting. Writes an entry to the log as `[$timestamp] ($type) $message`.  
-> @param `$format` The message to use formatting  
-> @param `@args` Arguments to format into the `$format` string  
-> @returns Logger instance
+> Log an error message with [sprintf][] formatting. Writes an entry to
+> the log as `[$timestamp] ($type) $message`.
+>
+> @param — The message to use formatting.
+>
+> @param `...` — Arguments to format into the `$format` string.
+>
+> @returns — Logger instance for chaining.
 
 * message
-> Log a message with `sprintf` formatting. Writes an entry to the log as `[$timestamp] ($type) $message`.  
-> @param `$format` The mesage to use formatting  
-> @param `@args` Arguments to format into the `$format` string  
-> @returns Logger instance
+> Log a message with [sprintf][] formatting. Writes an entry to the log
+> as `[$timestamp] ($type) $message`.
+>
+> @param — The mesage to use formatting.
+>
+> @param `...` — Arguments to format into the `$format` string.
+>
+> @returns — Logger instance for chaining.
+
+* warn
+> Log a warning with [sprintf][] formatting. Writes an entry to the log
+> as `[$timestamp] ($type) $message`.
+>
+> @param — The mesage to use formatting.
+>
+> @param `...` — Arguments to format into the `$format` string.
+>
+> @returns — Logger instance for chaining.
 
 * read
-> Get the contents of the log, useful for passing from a Controller to a View.  
-> @param `$as_array` Return the log file as a `string` or an `array`. Defaults to `string`.  
-> @param `$reverse` What order to return the array. The default is oldest first.  
-> @returns Either an array or string of the log file.
+> Get the contents of the log, useful for passing from a Controller
+> to a View.
+>
+> @param $as_array — Return the log file as a `string` or an `array`.
+> Defaults to `string`.
+>
+> @param $reverse — What order to return the array. The default is
+> oldest first.
+>
+> @returns — Either an array or string of the log file.
 
 * writable
-> Checks if the log file is writable.  
-> @returns Boolean status of writability
+> Checks if the log file is writable.
+>
+> @returns — Boolean status of writability
+
 
 ## TwigExtensions Class
 
@@ -128,12 +196,16 @@ Two simple extensions to the [Twig][] template language.
 * no_wspace
 > Removes all whitespace.
 
+
 ## Author
 
 Wilson Wise
 
-(c) 2012 Wilson Wise All rights reserved.
+(c) 2012 Wilson Wise. All rights reserved.
+
+
 
 [MySQLi]: http://us1.php.net/manual/en/book.mysqli.php
 [sprintf]: http://us1.php.net/manual/en/function.sprintf.php
 [preg_replace]: http://php.net/manual/en/function.preg-replace.php
+[Twig]: http://twig.sensiolabs.org/
