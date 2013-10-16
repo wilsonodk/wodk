@@ -75,6 +75,16 @@ class Wodk_Logger {
         return $this;
     }
 
+    public function warn() {
+        $args = func_get_args();
+        $msg  = array_shift($args);
+        $msg  = vsprintf($msg, $args);
+
+        $this->log('warning', $msg);
+
+        return $this;
+    }
+
     public function writable() {
         return is_writable($this->logFilePath);
     }
