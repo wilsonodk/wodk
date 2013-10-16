@@ -1,27 +1,26 @@
 # Wodk Library
 
 + [DB](./#db-class)
+> A MySQLi wrapper class with query formatting, table prefixing and "prepared" queries. 
 
 + [Logger](./#logger-class)
+> A very simple logger that writes to disk.
 
 + [Twig Extensions](./#twigextensions-class)
+> A few Twig filters that help with the Wodk Web App
 
 
 ## DB Class
 
-A subclass of [MySQLi][]. It includes a few helper methods that assist
-with query formatting. Query formatting allows for a statement to be
-written like `SELECT * FROM {{table}} WHERE id = %s`, then transformed
-into `SELECT * FROM myapp_table WHERE id = 1`.
+A subclass of [MySQLi][]. It includes a few helper methods that assist with query formatting. Query formatting allows for a statement
+to be written like `SELECT * FROM {{table}} WHERE id = %s`, then transformed into `SELECT * FROM myapp_table WHERE id = 1`.
 
 * qry
-> This will execute a SQL statement, but is extended to take arguments
-> ala [sprintf][].
+> This will execute a SQL statement, but is extended to take arguments ala [sprintf][].
 >
 > @param — The first argument is the SQL statement.
 >
-> @param `...` — The following arguments are items to be formatted into
-> the SQL statement.
+> @param `...` — The following arguments are items to be formatted into the SQL statement.
 >
 > @returns — The query with all argments formatted.
 
@@ -29,18 +28,14 @@ into `SELECT * FROM myapp_table WHERE id = 1`.
 > @returns — Returns the insert id from the last INSERT query.
 
 * setPrefix
-> Will set the prefix to be used when formatting a query. Will
-> determine if we need to use a prefix based on what is passed in.
+> Will set the prefix to be used when formatting a query. Will determine if we need to use a prefix based on what is passed in.
 >
-> @param $prefix — A string to use a the prefix for tables in SQL
-> statements.
+> @param $prefix — A string to use a the prefix for tables in SQL statements.
 >
 > @returns — DB instance for chaining.
 
 * setPrefixPattern
-> Set the Regular Expression to used for prefix replacement. The
-> default RegEx is `'/{{(\w+)}}/'`. See [preg_replace][] for more
-> information.
+> Set the Regular Expression to used for prefix replacement. The default RegEx is `'/{{(\w+)}}/'`. See [preg_replace][] for more information.
 >
 > @param $pattern — A string of a RegEx pattern.
 >
@@ -78,6 +73,7 @@ into `SELECT * FROM myapp_table WHERE id = 1`.
 
 * getLastQuery
 > Return the last query in it's "prepared" format.
+>
 > @returns — The formatted query that was last run.
 
 * formatQuery
@@ -92,8 +88,7 @@ into `SELECT * FROM myapp_table WHERE id = 1`.
 * prepareQuery
 > Do the formatting of a query.
 >
-> @param $args — An array of items to format. First item is the SQL
-> statement. Remaining items are to be formatted into SQL statement.
+> @param $args — An array of items to format. First item is the SQL statement. Remaining items are to be formatted into SQL statement.
 >
 > @returns — The formatted query.
 
@@ -105,32 +100,25 @@ simple log file that can then be displayed to an administrative user of
 the web app.
 
 * log
-> Record a particular message in the file. There are two ways to use
-> it, simple or complex.
+> Record a particular message in the file. There are two ways to use it, simple or complex.
 >
-> Simple logging takes one argument, the log message. Writes an entry
-> to the log as `[$timestamp] message`.
+> Simple logging takes one argument, the log message. Writes an entry to the log as `[$timestamp] message`.
 >
-> @param — The message.
+>> @param — The message.
+>>
+>> @returns — Logger instance for chaining.
 >
-> @returns — Logger instance for chaining.
+> Complex logging takes at least two arguments. The first is the `type` of message. The remaining arguments are messages to log with that `type`. 
+> Writes as entry to the log as `[$timestamp] ($type) $message`.
 >
-> Complex logging takes at least two arguments. The first is the
-> `type` of message.
->
-> The remaining arguments are messages to log with that `type`. Writes
-> as entry to the log as `[$timestamp] ($type) $message`.
->
-> @param — The type of message; typically `error` or `message`. Any
-> value is allowed.
->
-> @param `...` — The messages to log as this `type`.
->
-> @returns — Logger instance for chaining.
+>> @param — The type of message; typically `error` or `message`. Any value is allowed.
+>>
+>> @param `...` — The messages to log as this `type`.
+>>
+>> @returns — Logger instance for chaining.
 
 * error
-> Log an error message with [sprintf][] formatting. Writes an entry to
-> the log as `[$timestamp] ($type) $message`.
+> Log an error message with [sprintf][] formatting. Writes an entry to the log as `[$timestamp] ($type) $message`.
 >
 > @param — The message to use formatting.
 >
@@ -139,8 +127,7 @@ the web app.
 > @returns — Logger instance for chaining.
 
 * message
-> Log a message with [sprintf][] formatting. Writes an entry to the log
-> as `[$timestamp] ($type) $message`.
+> Log a message with [sprintf][] formatting. Writes an entry to the log as `[$timestamp] ($type) $message`.
 >
 > @param — The mesage to use formatting.
 >
@@ -149,8 +136,7 @@ the web app.
 > @returns — Logger instance for chaining.
 
 * warn
-> Log a warning with [sprintf][] formatting. Writes an entry to the log
-> as `[$timestamp] ($type) $message`.
+> Log a warning with [sprintf][] formatting. Writes an entry to the log as `[$timestamp] ($type) $message`.
 >
 > @param — The mesage to use formatting.
 >
@@ -159,14 +145,11 @@ the web app.
 > @returns — Logger instance for chaining.
 
 * read
-> Get the contents of the log, useful for passing from a Controller
-> to a View.
+> Get the contents of the log, useful for passing from a Controller to a View.
 >
-> @param $as_array — Return the log file as a `string` or an `array`.
-> Defaults to `string`.
+> @param $as_array — Return the log file as a `string` or an `array`. Defaults to `string`.
 >
-> @param $reverse — What order to return the array. The default is
-> oldest first.
+> @param $reverse — What order to return the array. The default is oldest first.
 >
 > @returns — Either an array or string of the log file.
 
@@ -181,14 +164,10 @@ the web app.
 Two simple extensions to the [Twig][] template language.
 
 * one_space 
-> Converts all multi-spaces inside a string to a single string. This is
-> really to cleanup the output of a Twig template. Very handy for
-> whitespace sensive contexts.
+> Converts all multi-spaces inside a string to a single string. This is really to cleanup the output of a Twig template. Very handy for whitespace sensive contexts.
 
 * log_style
-> Style a single line of Wodk/Logger output. Great for complex output.
-> The `timestamp` is given the class stamp. The `message` is given the
-> class of `type`.
+> Style a single line of Wodk\Logger output. Great for complex output. The `timestamp` is given the css class `stamp`. The `message` is given the css class of `type`.
 
 * get_day
 > Returns the day of the week in short format.

@@ -1,7 +1,7 @@
 {
     "name": "Wodk/Wodk",
     "type": "library",
-    "version": "v1.0.0",
+    "version": "v1.0.0-RC2",
     "keywords": [
         "database",
         "mysqli",
