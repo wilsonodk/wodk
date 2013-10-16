@@ -1,10 +1,10 @@
 # Wodk Library
 
-+ [DB][#db-class]
++ [DB](./#db-class)
 
-+ [Logger][#logger-class]
++ [Logger](./#logger-class)
 
-+ [Twig Extensions][#twigextensions-class]
++ [Twig Extensions](./#twigextensions-class)
 
 
 ## DB Class
