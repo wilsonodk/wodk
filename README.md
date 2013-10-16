@@ -9,6 +9,8 @@
 + [Twig Extensions](./#twigextensions-class)
 > A few Twig filters that help with the Wodk Web App
 
+### Getting Started
+
 ```php
 // After installing with Composer, autoload the Wodk classes.
 require_once 'vendor/autoload.php';
