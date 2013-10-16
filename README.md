@@ -11,6 +11,22 @@
 
 ### Getting Started
 
+In your `composer.json`:
+```json
+{
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/wilsonodk/wodk"
+        }
+    ],
+    "require": {
+        "Wodk/Wodk": "vX.Y.Z"
+    }
+}
+```
+
+In your application:
 ```php
 // After installing with Composer, autoload the Wodk classes.
 require_once 'vendor/autoload.php';
