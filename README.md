@@ -46,7 +46,7 @@ to be written like `SELECT * FROM {{table}} WHERE id = %s`, then transformed int
 $db = new Wodk_DB(...);
 
 // Make a query
-$query = 'SELECT * FROM foo';
+$query = 'SELECT field_name FROM foo_table';
 if ($result = $db->qry($query)) {
     while ($obj = $result->fetch_object()) {
         // $obj->field_name
