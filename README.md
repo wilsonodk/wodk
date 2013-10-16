@@ -9,11 +9,37 @@
 + [Twig Extensions](./#twigextensions-class)
 > A few Twig filters that help with the Wodk Web App
 
+```php
+// After installing with Composer, autoload the Wodk classes.
+require_once 'vendor/autoload.php';
+```
+
 
 ## DB Class
 
 A subclass of [MySQLi][]. It includes a few helper methods that assist with query formatting. Query formatting allows for a statement
 to be written like `SELECT * FROM {{table}} WHERE id = %s`, then transformed into `SELECT * FROM myapp_table WHERE id = 1`.
+
+
+### Example Usage
+
+```php
+// Wodk_DB uses the same constructor arguments as MySQLi
+$db = new Wodk_DB(...);
+
+// Make a query
+$query = 'SELECT * FROM foo';
+if ($result = $db->qry($query)) {
+    while ($obj = $result->fetch_object()) {
+        // $obj->field_name
+    }
+} else {
+    // Catch error
+}
+```
+
+
+### Documentation
 
 * qry
 > This will execute a SQL statement, but is extended to take arguments ala [sprintf][].
@@ -99,6 +125,34 @@ A very simple logging class. The purpose of this class is to provide a
 simple log file that can then be displayed to an administrative user of
 the web app.
 
+
+### Example Usage
+
+```php
+// Wodk_Logger needs the path to the log file, and it needs to be
+// writable by the webserver.
+$log = new Wodk_Logger('/var/www/example.log');
+
+// Log simple
+$log->log('A simple message.');
+// Output:
+// [Wed, Dec 31 1969 19:00:00 -0500] A simple message.
+
+// Log complex
+$log->log('error', 'An error.', 'Another error message.');
+// Output:
+// [Wed, Dec 31 1969 19:00:00 -0500] (error) An error.
+// [Wed, Dec 31 1969 19:00:00 -0500] (error) Another error message.
+
+// Using helper methods error, message and warn
+$log->warn('Issue a warning on "%s".', 'this system');
+// Output:
+// [Wed, Dec 31 1969 19:00:00 -0500] (warning) Issue a warning on "this system".
+```
+
+
+### Documentation
+
 * log
 > Record a particular message in the file. There are two ways to use it, simple or complex.
 >
@@ -162,6 +216,18 @@ the web app.
 ## TwigExtensions Class
 
 Two simple extensions to the [Twig][] template language.
+
+
+### Example
+
+```php
+// Must have a Twig instance for this class to be meaningful.
+// To use this, call "addExtension" on your Twig instance.
+$twig->addExtension(new Wodk_TwigExtensions());
+```
+
+
+### Documentation
 
 * one_space 
 > Converts all multi-spaces inside a string to a single string. This is really to cleanup the output of a Twig template. Very handy for whitespace sensive contexts.
