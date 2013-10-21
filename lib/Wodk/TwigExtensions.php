@@ -19,6 +19,7 @@ class Wodk_TwigExtensions extends Twig_Extension
             'log_style' => new Twig_Filter_Method($this, 'styleLogLine'),
             'get_day'   => new Twig_Filter_Method($this, 'getDay'),
             'no_wspace' => new Twig_Filter_Method($this, 'noWhiteSpace'),
+            'css_id'    => new Twig_Filter_Method($this, 'convertStringToCssId'),
         );
     }
 
@@ -59,6 +60,14 @@ class Wodk_TwigExtensions extends Twig_Extension
         $regex = '/\w+/';
 
         return preg_replace($regex, '', $str);
+    }
+
+    public function convertStringToCssId($str) {
+        $regex = '/[ \']/';
+
+        $str = strtolower($str);
+
+        return preg_replace($regex, '-', $str);
     }
 }
 ?>

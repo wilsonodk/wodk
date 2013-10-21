@@ -259,6 +259,13 @@ $twig->addExtension(new Wodk_TwigExtensions());
 * no_wspace
 > Removes all whitespace.
 
+* css_id
+> Makes an arbitrary string safe to use as a CSS selector. Very handy for taking data to make into CSS ID selectors.
+>
+> * Example: `M'NEER` becomes `m-neer`.
+>
+> * Example: `TITLE IX` becomes `title-ix`.
+
 
 ## Author
 
