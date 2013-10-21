@@ -21,7 +21,7 @@ In your `composer.json`:
         }
     ],
     "require": {
-        "Wodk/Wodk": "vX.Y.Z"
+        "wodk/wodk": "vX.Y.Z"
     }
 }
 ```
