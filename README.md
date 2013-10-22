@@ -11,6 +11,8 @@ A utility library intended to be used with the [Wodk Web App][] scaffolding.
 + [Wodk_TwigExtensions][]
 > A few [Twig][] filters that help with the [Wodk Web App][].
 
+Checkout [the wiki][] for the latest information and documentation.
+
 
 ### Getting Started
 
@@ -44,6 +46,7 @@ Wilson Wise
 
 
 
+[the wiki]: https://github.com/wilsonodk/wodk/wiki
 [Wodk Web App]: https://github.com/wilsonodk/Wodk-Web-App
 [Wodk_DB]: https://github.com/wilsonodk/wodk/wiki/Wodk-DB
 [Wodk_Logger]: https://github.com/wilsonodk/wodk/wiki/Wodk-Logger
